@@ -1,0 +1,71 @@
+<Window x:Class="WpfAppUP3.materialy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppUP3"
+        mc:Ignorable="d"
+        Title="Справочник материалов"
+        Height="620" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgCream}"
+        FontFamily="{StaticResource AppFont}"
+        Loaded="Window_Loaded">
+
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Справочник материалов" Style="{StaticResource WindowHeader}"/>
+            <TextBlock Text="Номенклатура материалов, единицы измерения и типы"
+                       Style="{StaticResource CaptionText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dg" Grid.Row="1" Style="{StaticResource AppDataGrid}"
+                  SelectionChanged="dg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id_materiala}" Width="50"/>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Naimenovanie}" Width="*" MinWidth="220"/>
+                <DataGridTextColumn Header="Ед. изм." Binding="{Binding Edinica_izmereniya}" Width="100"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding Tip}" Width="140"/>
+                <DataGridTextColumn Header="Цена, руб." Binding="{Binding Cena}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="2" Background="{StaticResource Surface}" BorderBrush="{StaticResource Border}"
+                BorderThickness="1" CornerRadius="10" Padding="16" Margin="0,14,0,0">
+            <StackPanel>
+                <WrapPanel>
+                    <StackPanel Width="280" Margin="0,0,14,10">
+                        <TextBlock Text="Наименование" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtName" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="140" Margin="0,0,14,10">
+                        <TextBlock Text="Единица измерения" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtEd" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="180" Margin="0,0,14,10">
+                        <TextBlock Text="Тип" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtTip" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="140" Margin="0,0,14,10">
+                        <TextBlock Text="Цена, руб." Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtCena" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                </WrapPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <Button Content="Добавить" Style="{StaticResource PrimaryButton}" Width="130" Margin="0,0,10,0" Click="add_Click"/>
+                    <Button Content="Изменить" Style="{StaticResource SecondaryButton}" Width="130" Margin="0,0,10,0" Click="upd_Click"/>
+                    <Button Content="Удалить" Style="{StaticResource DangerButton}" Width="130" Margin="0,0,10,0" Click="del_Click"/>
+                    <Button Content="Очистить" Style="{StaticResource SecondaryButton}" Width="130" Click="clear_Click"/>
+                    <TextBox x:Name="txtID" Width="60" Margin="14,0,0,0" Visibility="Hidden"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

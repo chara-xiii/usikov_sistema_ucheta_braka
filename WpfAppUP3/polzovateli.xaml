@@ -1,0 +1,78 @@
+<Window x:Class="WpfAppUP3.polzovateli"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppUP3"
+        mc:Ignorable="d"
+        Title="Пользователи системы"
+        Height="660" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgCream}"
+        FontFamily="{StaticResource AppFont}"
+        Loaded="Window_Loaded">
+
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Пользователи системы" Style="{StaticResource WindowHeader}"/>
+            <TextBlock Text="Управление учётными записями, ролями и доступом"
+                       Style="{StaticResource CaptionText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dg" Grid.Row="1" Style="{StaticResource AppDataGrid}"
+                  SelectionChanged="dg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id_polzovatelya}" Width="50"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}" Width="*" MinWidth="180"/>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="140"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Nazvanie_roli}" Width="180"/>
+                <DataGridTextColumn Header="Дата регистрации" Binding="{Binding Data_registracii}" Width="140"/>
+                <DataGridTextColumn Header="Активен" Binding="{Binding AktivenText}" Width="90"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="2" Background="{StaticResource Surface}" BorderBrush="{StaticResource Border}"
+                BorderThickness="1" CornerRadius="10" Padding="16" Margin="0,14,0,0">
+            <StackPanel>
+                <WrapPanel>
+                    <StackPanel Width="240" Margin="0,0,14,10">
+                        <TextBlock Text="ФИО" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtFio" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="170" Margin="0,0,14,10">
+                        <TextBlock Text="Логин" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtLogin" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="170" Margin="0,0,14,10">
+                        <TextBlock Text="Пароль" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtParol" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="200" Margin="0,0,14,10">
+                        <TextBlock Text="Роль" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="cmbRole" Style="{StaticResource FieldComboBox}" Height="32"
+                                  DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    </StackPanel>
+                    <StackPanel Width="120" Margin="0,0,14,10" VerticalAlignment="Bottom">
+                        <CheckBox x:Name="chkAktiven" Content="Активен" IsChecked="True"
+                                  VerticalAlignment="Center" Margin="0,0,0,8"
+                                  FontFamily="{StaticResource AppFont}"/>
+                    </StackPanel>
+                </WrapPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <Button Content="Добавить" Style="{StaticResource PrimaryButton}" Width="130" Margin="0,0,10,0" Click="add_Click"/>
+                    <Button Content="Изменить" Style="{StaticResource SecondaryButton}" Width="130" Margin="0,0,10,0" Click="upd_Click"/>
+                    <Button Content="Удалить" Style="{StaticResource DangerButton}" Width="130" Margin="0,0,10,0" Click="del_Click"/>
+                    <Button Content="Очистить" Style="{StaticResource SecondaryButton}" Width="130" Click="clear_Click"/>
+                    <TextBox x:Name="txtID" Width="60" Margin="14,0,0,0" Visibility="Hidden"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,88 @@
+<Window x:Class="WpfAppUP3.brak"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppUP3"
+        mc:Ignorable="d"
+        Title="Учёт брака"
+        Height="700" Width="1080"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgCream}"
+        FontFamily="{StaticResource AppFont}"
+        Loaded="Window_Loaded">
+
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Реестр учёта брака" Style="{StaticResource WindowHeader}"/>
+            <TextBlock Text="Регистрация выявленных дефектов по материалам и партиям"
+                       Style="{StaticResource CaptionText}" Margin="0,3,0,0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dg" Grid.Row="1" Style="{StaticResource AppDataGrid}"
+                  SelectionChanged="dg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding Id_braka}" Width="45"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Data_vyyavleniya}" Width="90"/>
+                <DataGridTextColumn Header="Материал" Binding="{Binding Material}" Width="*" MinWidth="150"/>
+                <DataGridTextColumn Header="Поставщик" Binding="{Binding Postavshchik}" Width="*" MinWidth="140"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Kolichestvo}" Width="80"/>
+                <DataGridTextColumn Header="Причина" Binding="{Binding Prichina}" Width="130"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Opisanie}" Width="*" MinWidth="160"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="2" Background="{StaticResource Surface}" BorderBrush="{StaticResource Border}"
+                BorderThickness="1" CornerRadius="10" Padding="16" Margin="0,14,0,0">
+            <StackPanel>
+                <WrapPanel>
+                    <StackPanel Width="220" Margin="0,0,14,10">
+                        <TextBlock Text="Материал" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="cmbMaterial" Style="{StaticResource FieldComboBox}" Height="32"
+                                  DisplayMemberPath="Name" SelectedValuePath="Id" SelectionChanged="cmbMaterial_SelectionChanged"/>
+                    </StackPanel>
+                    <StackPanel Width="260" Margin="0,0,14,10">
+                        <TextBlock Text="Партия (необязательно)" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="cmbPartia" Style="{StaticResource FieldComboBox}" Height="32"
+                                  DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    </StackPanel>
+                    <StackPanel Width="150" Margin="0,0,14,10">
+                        <TextBlock Text="Дата выявления" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <DatePicker x:Name="dpData" Style="{StaticResource FieldDatePicker}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="120" Margin="0,0,14,10">
+                        <TextBlock Text="Количество" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtKol" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="180" Margin="0,0,14,10">
+                        <TextBlock Text="Причина" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="cmbPrichina" Style="{StaticResource FieldComboBox}" Height="32" IsEditable="True"/>
+                    </StackPanel>
+                    <StackPanel Width="180" Margin="0,0,14,10">
+                        <TextBlock Text="Статус" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="cmbStatus" Style="{StaticResource FieldComboBox}" Height="32"/>
+                    </StackPanel>
+                    <StackPanel Width="420" Margin="0,0,14,10">
+                        <TextBlock Text="Описание дефекта" Style="{StaticResource BaseText}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtOpisanie" Style="{StaticResource FieldTextBox}" Height="32"/>
+                    </StackPanel>
+                </WrapPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <Button Content="Добавить" Style="{StaticResource PrimaryButton}" Width="130" Margin="0,0,10,0" Click="add_Click"/>
+                    <Button Content="Изменить" Style="{StaticResource SecondaryButton}" Width="130" Margin="0,0,10,0" Click="upd_Click"/>
+                    <Button Content="Удалить" Style="{StaticResource DangerButton}" Width="130" Margin="0,0,10,0" Click="del_Click"/>
+                    <Button Content="Очистить" Style="{StaticResource SecondaryButton}" Width="130" Click="clear_Click"/>
+                    <TextBox x:Name="txtID" Width="60" Margin="14,0,0,0" Visibility="Hidden"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
